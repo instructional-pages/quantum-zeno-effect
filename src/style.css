@@ -1,19 +1,368 @@
 :root {
-  color-scheme: dark;
   --bg: #000;
-  --fg: #e6e6e6;
+  --text: #c8d0d8;
+  --muted: #6b7680;
+  --faint: #1c2228;
 }
 
 body {
   margin: 0;
   background: var(--bg);
-  color: var(--fg);
+  color: var(--text);
   font-family: system-ui, sans-serif;
-  line-height: 1.5;
 }
 
 main {
-  max-width: 40rem;
-  margin: 4rem auto;
-  padding: 0 1.5rem;
+  display: flex;
+  height: 100vh;
+}
+
+a {
+  color: var(--text);
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--muted);
+}
+
+/* The rows, one per small view, are set by linkViews. */
+.views {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(12rem, 24%);
+}
+
+/* The main view fills the left; the others stack beside it, in page order. */
+.views .main {
+  grid-column: 1;
+  grid-row: 1 / -1;
+}
+
+.views figure:not(.main) {
+  grid-column: 2;
+  cursor: pointer;
+}
+
+.views figure:not(.main):focus-visible {
+  outline: 1px solid var(--muted);
+  outline-offset: -1px;
+}
+
+figure {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+}
+
+/* Out of the flow, so the drawing buffer's size, set from the canvas's own size on
+   each draw, can't push the row taller and set off a resize loop. */
+figure canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+figcaption {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+figure:not(.main) figcaption {
+  top: 1rem;
+  font-size: 0.75rem;
+}
+
+/* Labels drawn over a view, centred on their point. */
+.marks span {
+  position: absolute;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+figure:not(.main) .marks span {
+  font-size: 0.625rem;
+}
+
+aside {
+  width: 18rem;
+  padding: 3rem 2.5rem;
+  overflow-y: auto;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.status,
+.note,
+.up {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.sliders {
+  margin: 2rem 0;
+}
+
+.sliders label {
+  display: grid;
+  grid-template-columns: 3rem 1fr 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.sliders input {
+  width: 100%;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+}
+
+.sliders input::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--faint);
+}
+
+.sliders input::-moz-range-track {
+  height: 2px;
+  background: var(--faint);
+}
+
+.sliders input::-webkit-slider-thumb {
+  appearance: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: calc(1px - 0.375rem);
+  border: none;
+  border-radius: 50%;
+  background: var(--text);
+}
+
+.sliders input::-moz-range-thumb {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--text);
+}
+
+.sliders input:focus-visible {
+  outline: 1px solid var(--muted);
+  outline-offset: 4px;
+}
+
+.sliders output {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* The lesson shell. */
+.up {
+  display: inline-block;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+.up:hover {
+  color: var(--text);
+}
+
+.counter {
+  margin: -0.5rem 0 1.5rem;
+}
+
+.text p {
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+/* Each prompt is a row of the check's grid, so the inputs line up under the longest
+   label. */
+.check {
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: max-content auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.check > * {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.check .prompt {
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+  justify-self: stretch;
+}
+
+.check output {
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* A prompt answered by picking: its choices in a row, the picked one bordered bright. */
+.check .choices {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.choices button {
+  padding: 0.25rem 0.75rem;
+}
+
+.choices button[aria-pressed="true"] {
+  border-color: var(--text);
+}
+
+.choices button[aria-pressed="true"]:disabled {
+  color: var(--text);
+}
+
+.check .right output {
+  color: var(--text);
+}
+
+.check p {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+input[type="text"],
+button {
+  font: inherit;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--faint);
+  border-radius: 2px;
+}
+
+input[type="text"] {
+  width: 3.5rem;
+  box-sizing: border-box;
+  padding: 0.25rem 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="text"]:read-only {
+  border-color: transparent;
+}
+
+button {
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+button:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 1px solid var(--muted);
+  outline-offset: 2px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+/* A choice shown as a picture: the drawing, its name under it. */
+.choices button:has(svg) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0.4rem 0.2rem;
+  font-size: 0.875rem;
+}
+
+.choices svg {
+  display: block;
+}
+
+/* Lesson 2's angle: the degrees large, the share of a turn under them. */
+.readout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.readout .value {
+  font-size: 2.5rem;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+
+figure:not(.main) .readout .value {
+  font-size: 1.5rem;
+}
+
+.readout .note {
+  min-height: 1.5em;
+}
+
+figure:not(.main) .readout .note {
+  font-size: 0.75rem;
+}
+
+/* A formula set apart in the step text. */
+aside .formula {
+  padding-left: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The contents page: one quiet column of text. */
+main.page {
+  display: block;
+  height: auto;
+}
+
+.contents {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+
+.contents ol {
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  line-height: 2.2;
+}
+
+.contents .later {
+  color: var(--muted);
 }
