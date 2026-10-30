@@ -20,3 +20,7 @@ export function twoPlaces(x: number): string {
   const text = x.toFixed(2);
   return Number(text) === 0 ? "0.00" : text.replace("-", "−");
 }
+
+// The chance of up worked out from a height `h`: "(1 + 0.50) / 2", or "(1 − 0.71) / 2"
+// rather than "(1 + −0.71) / 2".
+export const chanceSum = (h: number): string => `(1 ${twoPlaces(h).startsWith("−") ? "−" : "+"} ${twoPlaces(Math.abs(h))}) / 2`;
