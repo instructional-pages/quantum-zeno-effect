@@ -154,3 +154,9 @@ starting the repo.
 - **Question:** Lesson 3's answer is ¾. Must the learner type 0.75?
 - **Choice:** A typed prediction may also be a fraction ("3/4"), read as its value.
 - **Why:** Chances in the lessons are worked out as fractions, so marking "3/4" wrong would be unfair.
+
+## 2026-10-30: What lesson 4's Tally view counts (decided by Claude, pending review)
+
+- **Question:** Lesson 4 has a Check button on the sphere's arrow and runs that check twice. What does the Tally view count?
+- **Choice:** Before the sandbox, the checks of the arrow on the sphere: a check that moves the arrow starts the count afresh with its answer, so pressing Check again shows "3 checks in a row" all with one answer. In the sandbox, runs are fresh arrows at the set angle, as in lesson 3, checked twice: the bars count the first answers (with the chance marked) and the status line counts how often the second agreed. Moving the arrow by hand clears the tally.
+- **Why:** The repeated answer is the lesson's point, so the view that counts answers should show it, rather than sit empty until the sandbox. The second answer always matches, so a second pair of bars would only repeat the first.

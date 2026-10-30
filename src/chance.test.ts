@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { emptyTally, fraction, record, runs, twoPlaces } from "./chance.ts";
+import { chanceSum, emptyTally, fraction, record, runs, twoPlaces } from "./chance.ts";
 import { check, height, seeded } from "./zeno.ts";
 
 test("a tally counts each answer and gives its share of the runs", () => {
@@ -32,4 +32,10 @@ test("numbers are written to two places, with a minus sign and no −0.00", () =
   assert.equal(twoPlaces(height(270)), "0.00");
   assert.equal(twoPlaces(-0.001), "0.00");
   assert.equal(twoPlaces(1), "1.00");
+});
+
+test("the chance of up is worked out with a plain minus below the middle", () => {
+  assert.equal(chanceSum(0.5), "(1 + 0.50) / 2");
+  assert.equal(chanceSum(-Math.SQRT1_2), "(1 − 0.71) / 2");
+  assert.equal(chanceSum(-1e-17), "(1 + 0.00) / 2");
 });

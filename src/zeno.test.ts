@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { amplitudeUp, arrowAt, chanceDown, chanceUp, check, endsDown, height, run, seeded, survival } from "./zeno.ts";
+import { amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, height, run, seeded, survival } from "./zeno.ts";
 
 const round = (x: number, places: number) => Number(x.toFixed(places));
 
@@ -52,10 +52,11 @@ test("the same seed gives the same numbers, all in [0, 1)", () => {
 
 test("a second check at once always repeats the first (lesson 4)", () => {
   const random = seeded(1);
-  for (let i = 0; i < 500; i++) {
-    const answer = check(120, random);
-    assert.equal(check(answer === "up" ? 0 : 180, random), answer);
-  }
+  const pairs = Array.from({ length: 2000 }, () => checkTwice(120, random));
+  for (const [first, second] of pairs) assert.equal(second, first);
+  // The first check still has its chance: up a quarter of the time at 120°.
+  const ups = pairs.filter(([first]) => first === "up").length;
+  assert.ok(Math.abs(ups / 2000 - 0.25) < 0.03);
 });
 
 test("many checks of one angle settle near its chance (lesson 3's tally)", () => {

@@ -6,6 +6,20 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-30
+
+### Added
+
+- Lesson 4, "Checking": a Check button that answers up or down with the chances of
+  lesson 3 and leaves the arrow pointing at its answer; checking again repeats it, and the
+  tally counts the checks in a row; the spinning coin analogy and where it breaks; a side
+  note on decoherence; a check on the chance of up right after a check; and a sandbox where
+  each run checks a fresh arrow twice and counts how often the second check agrees.
+
+### Changed
+
+- Rows of buttons wrap rather than squeeze their labels onto two lines.
+
 ## [0.2.0] - 2026-10-30
 
 ### Added

@@ -43,8 +43,15 @@ export function seeded(seed: number): () => number {
 // One check of an arrow at `angle` (lesson 4).
 export const check = (angle: number, random: () => number): Answer => (random() < chanceUp(angle) ? "up" : "down");
 
-// Where a check leaves the arrow.
-const reset = (answer: Answer | undefined): number => (answer === "down" ? 180 : 0);
+// Where a check leaves the arrow: pointing at its answer.
+export const reset = (answer: Answer | undefined): number => (answer === "down" ? 180 : 0);
+
+// An arrow at `angle` checked twice in a row: the second check finds the arrow where the
+// first left it (lesson 4).
+export function checkTwice(angle: number, random: () => number): [Answer, Answer] {
+  const first = check(angle, random);
+  return [first, check(reset(first), random)];
+}
 
 // One random run from the top: the arrow turns `turn` degrees in all, checked `checks`
 // times at equal spacing, the last at the end. A "down" sends it to the bottom, and it

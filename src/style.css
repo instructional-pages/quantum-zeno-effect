@@ -367,15 +367,20 @@ main.page {
   color: var(--muted);
 }
 
-/* A row of buttons among the sliders. */
+/* A row of buttons among the sliders, each label on one line. */
 .sliders .buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
   margin: 1.25rem 0;
 }
 
-/* Lesson 3's tally: two bars, told apart by their names, each filled to its share of
-   the runs, with the chance as a dashed mark across it. */
+.sliders .buttons button {
+  white-space: nowrap;
+}
+
+/* The tally (lessons 3 and 4): two bars, told apart by their names, each filled to its
+   share of the runs, with the chance as a dashed mark across it. */
 .tally {
   position: absolute;
   inset: 5.5rem 1rem 2rem;
@@ -446,7 +451,7 @@ figure:not(.main) .tally .column {
   color: var(--muted);
 }
 
-/* Lesson 3's formula with the live numbers, one line each. */
+/* The Math view's formula with the live numbers, one line each. */
 .math {
   position: absolute;
   top: 50%;

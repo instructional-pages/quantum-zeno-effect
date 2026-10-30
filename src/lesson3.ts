@@ -5,10 +5,11 @@
 // the Math view writes the formula out with the live numbers.
 
 import { degrees } from "./angle.ts";
-import { emptyTally, fraction, record, runs, twoPlaces, type Tally } from "./chance.ts";
+import { chanceSum, emptyTally, fraction, record, runs, twoPlaces, type Tally } from "./chance.ts";
 import type { Lesson } from "./lesson.ts";
-import { arrowTip, heightFoot, type Vec3 } from "./sphere.ts";
-import { addButtons, addSlider, span } from "./ui.ts";
+import { heightMarks } from "./marks.ts";
+import { createTallyView } from "./tally.ts";
+import { addButtons, addSlider } from "./ui.ts";
 import { createSphereView } from "./view.ts";
 import { chanceUp, check, height, type Answer } from "./zeno.ts";
 
@@ -28,8 +29,6 @@ const STEPS: { angle: number; slider: boolean; runs: boolean; math: Shown }[] = 
   { angle: 60, slider: true, runs: true, math: "cosine" },
 ];
 
-const ANSWERS: Answer[] = ["up", "down"];
-
 // The Math view's lines for the arrow at `angle`, HTML.
 function mathLines(angle: number, shown: Shown, tally: Tally): string[] {
   const h = height(angle);
@@ -38,20 +37,13 @@ function mathLines(angle: number, shown: Shown, tally: Tally): string[] {
   if (shown === "chance") lines.push(`chance of up = ${up}`, `chance of down = ${twoPlaces(1 - chanceUp(angle))}`);
   else {
     lines.push(shown === "height" || shown === "formula" ? `height = ${twoPlaces(h)}` : `height = cos ${degrees(angle)} = ${twoPlaces(h)}`);
-    // (1 − 0.71) rather than (1 + −0.71).
-    const sum = `(1 ${h < 0 && twoPlaces(h) !== "0.00" ? "−" : "+"} ${twoPlaces(Math.abs(h))}) / 2`;
+    const sum = chanceSum(h);
     if (shown === "check") lines.push(`chance of up = ${sum} = ?`);
     else if (shown !== "height") lines.push(`chance of up = ${sum} = ${up}`, `chance of down = 1 − ${up} = ${twoPlaces(1 - chanceUp(angle))}`);
   }
   if (runs(tally)) lines.push(`<span class="note">up in ${tally.up} of ${runs(tally)} runs = ${twoPlaces(fraction(tally, "up")!)}</span>`);
   return lines;
 }
-
-// Labels just outside the top and bottom of the circle in use.
-const ENDS: { at: Vec3; text: string; withHeight: string }[] = [
-  { at: arrowTip(0).map((c) => c * 1.14) as Vec3, text: "up", withHeight: "up · height 1" },
-  { at: arrowTip(180).map((c) => c * 1.14) as Vec3, text: "down", withHeight: "down · height −1" },
-];
 
 export const lesson3: Lesson = {
   title: "Chances",
@@ -114,25 +106,8 @@ export const lesson3: Lesson = {
     const view = createSphereView(canvas);
     if (!view) return null;
 
-    const marks = sphereFigure.appendChild(Object.assign(document.createElement("div"), { className: "marks" }));
-    const ends = ENDS.map(({ text }) => marks.appendChild(span(text, "label")));
-    const level = marks.appendChild(span("", "label"));
-
-    // Two bars, each with its count above, its share filled in, the chance as a dashed
-    // mark across it, and its name and share below.
-    const tallyBox = tallyFigure.appendChild(Object.assign(document.createElement("div"), { className: "tally" }));
-    const bars = tallyBox.appendChild(Object.assign(document.createElement("div"), { className: "bars" }));
-    const parts = ANSWERS.map((answer) => {
-      const bar = bars.appendChild(Object.assign(document.createElement("div"), { className: "bar" }));
-      const count = bar.appendChild(span("", "count"));
-      const column = bar.appendChild(Object.assign(document.createElement("div"), { className: "column" }));
-      const fill = column.appendChild(Object.assign(document.createElement("div"), { className: "fill" }));
-      const expect = column.appendChild(Object.assign(document.createElement("div"), { className: "expect" }));
-      bar.append(span(answer, "name"));
-      const share = bar.appendChild(span("", "share"));
-      return { count, fill, expect, share };
-    });
-    const status = tallyBox.appendChild(Object.assign(span("", "note"), { ariaLive: "polite" }));
+    const marks = heightMarks(sphereFigure, view);
+    const tallyView = createTallyView(tallyFigure);
     const math = mathFigure.appendChild(Object.assign(document.createElement("div"), { className: "math" }));
 
     let at = 0;
@@ -149,33 +124,10 @@ export const lesson3: Lesson = {
         const setup = STEPS[at]!;
         const shown = setup.math !== "chance";
         view.draw({ angle, arc: false, height: shown });
-        ends.forEach((label, k) => {
-          const [left, top] = view.screen(ENDS[k]!.at);
-          label.style.left = `${left}px`;
-          label.style.top = `${top}px`;
-          label.textContent = shown ? ENDS[k]!.withHeight : ENDS[k]!.text;
-        });
-        // The height's value beside the axis, on the side away from the arrow, except at
-        // the top and bottom, which their own labels give.
-        const h = height(angle);
-        level.hidden = !shown || Math.abs(h) > 0.97;
-        const [left, top] = view.screen([...heightFoot(angle)].map((c, k) => (k === 0 ? (arrowTip(angle)[0] >= 0 ? -0.2 : 0.2) : c)) as Vec3);
-        level.style.left = `${left}px`;
-        level.style.top = `${top}px`;
-        level.textContent = twoPlaces(h);
-
+        marks(angle, shown);
         // The chance is marked only where runs can be compared with it, so not before it
         // is taught, nor during the check.
-        parts.forEach(({ count, fill, expect, share }, k) => {
-          const answer = ANSWERS[k]!;
-          const part = fraction(tally, answer);
-          count.textContent = String(tally[answer]);
-          fill.style.height = `${100 * (part ?? 0)}%`;
-          expect.hidden = !setup.runs;
-          expect.style.bottom = `${100 * (answer === "up" ? chanceUp(angle) : 1 - chanceUp(angle))}%`;
-          share.textContent = part === null ? "" : twoPlaces(part);
-        });
-        status.textContent = runs(tally) ? `${runs(tally)} runs · last: ${last}` : setup.runs ? "dashed: the chance" : "";
+        tallyView.draw(tally, setup.runs ? chanceUp(angle) : null, runs(tally) ? `${runs(tally)} runs · last: ${last}` : "");
         math.innerHTML = mathLines(angle, setup.math, tally)
           .map((line) => `<p>${line}</p>`)
           .join("");
