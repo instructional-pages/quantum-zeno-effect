@@ -5,7 +5,7 @@ quantum system often enough keeps it from changing. A rotating state on a 3D Blo
 is interrupted by measurements you set, beside a plot of survival probability vs.
 measurement rate, with the math shown next to the pictures.
 
-Status: scaffold only (TypeScript + Vite, local CI); no lessons yet. Spec in [docs/BRIEF.md](docs/BRIEF.md); lesson outline in [docs/LESSONS.md](docs/LESSONS.md).
+Status: scaffold (TypeScript + Vite, local CI) and the physics module (`src/zeno.ts`: chances, survival over N checks, the Itano prediction, seeded random runs); no lessons yet. Spec in [docs/BRIEF.md](docs/BRIEF.md); lesson outline in [docs/LESSONS.md](docs/LESSONS.md).
 
 License: [MIT](LICENSE).
 

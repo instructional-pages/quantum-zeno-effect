@@ -117,3 +117,9 @@ starting the repo.
 - **Question:** What lessons does the course have, and in what order?
 - **Choice:** The ten lessons in `docs/LESSONS.md`, including its "Settled in review" choices: chance read from the arrow's height before the cos² form, degrees only, survival as "every check said up", and a "down" result doesn't end a run.
 - **Why:** Approved by the user in PR #1.
+
+## 2026-10-30: Where checks fall in a run (decided by Claude, pending review)
+
+- **Question:** At what moments do the N checks of a run happen?
+- **Choice:** Equally spaced, the last at the end of the run: check k at k/N of the way through. Lesson 1's "one check halfway through" is shown as a run of 2 checks (halfway and at the end), or by stopping the run halfway.
+- **Why:** It is the placement behind lesson 8's table (1 check → 0, 2 → 0.25) and Itano's prediction (lesson 9), and the arrow's final position always matches the last answer.
