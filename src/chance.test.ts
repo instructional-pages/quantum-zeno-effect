@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { chanceSum, emptyTally, fraction, record, runs, twoPlaces } from "./chance.ts";
-import { check, height, seeded } from "./zeno.ts";
+import { chanceSum, emptyTally, fraction, record, runs, squared, twoPlaces } from "./chance.ts";
+import { amplitudeUp, check, height, seeded } from "./zeno.ts";
 
 test("a tally counts each answer and gives its share of the runs", () => {
   const tally = record(emptyTally(), ["up", "up", "down", "up"]);
@@ -38,4 +38,11 @@ test("the chance of up is worked out with a plain minus below the middle", () =>
   assert.equal(chanceSum(0.5), "(1 + 0.50) / 2");
   assert.equal(chanceSum(-Math.SQRT1_2), "(1 − 0.71) / 2");
   assert.equal(chanceSum(-1e-17), "(1 + 0.00) / 2");
+});
+
+test("an amplitude is written to three places and squared into its chance (lesson 6)", () => {
+  assert.equal(squared(amplitudeUp(60)), "0.866² = 0.75");
+  assert.equal(squared(amplitudeUp(90)), "0.707² = 0.50");
+  assert.equal(squared(amplitudeUp(180)), "0.000² = 0.00");
+  assert.equal(squared(0.8), "0.800² = 0.64");
 });

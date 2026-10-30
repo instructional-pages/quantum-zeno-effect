@@ -172,3 +172,15 @@ starting the repo.
 - **Question:** What ranges do lesson 5's speed and time take, and what does the plot show before the wave is taught?
 - **Choice:** Speed 15–90° per second in steps of 5, time 0–12 seconds in tenths, on a fixed 0–12 second plot, so the half turn (2 to 12 seconds) is always on it. Before the wave step the plot shows only a dot at the current time and chance; during the check it shows only its axes, and the arrow waits at the top.
 - **Why:** The dot lets the learner build the wave by dragging before seeing it whole; a fixed time axis keeps "faster speed, tighter wave" visible; hiding the plot and arrow keeps the check from answering itself.
+
+## 2026-10-30: How the Amplitude circle is drawn (decided by Claude, pending review)
+
+- **Question:** Lesson 6's Amplitude circle: what does it show, and how is it drawn?
+- **Choice:** SVG like the Plot view (`src/amplitude.ts`): a faint circle with up at the top and down to the right, the quarter between them bright, the arrow turned half the sphere's angle (marked with an arc and its degrees), and dashed lines to the upright axis (amplitude of up) and, once taught, to the flat axis (amplitude of down), each with its value to three places. The amplitude of down is never called a sine; it is the arrow's sideways reach.
+- **Why:** Up and down at right angles is the picture behind "why half"; the dashed line repeats the sphere's height line, so reading an amplitude feels like reading a height. Three places make the Math view's "0.866² = 0.75" check out by hand.
+
+## 2026-10-30: Lesson 6's angle slider (decided by Claude, pending review)
+
+- **Question:** What range does lesson 6's angle take?
+- **Choice:** 0° to 180° in steps of 2°, so half the angle is always a whole number of degrees. The sandbox starts at 74°, the check's arrow (amplitude of up about 0.8).
+- **Why:** Past 180° the amplitude of up turns negative, and negative squares are not taught; up to down is all lesson 7 needs.

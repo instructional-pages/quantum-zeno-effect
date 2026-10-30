@@ -18,6 +18,10 @@ export const chanceDown = (angle: number): number => 1 - chanceUp(angle);
 // The amplitude of "up": the cosine of half the angle; its square is chanceUp (lesson 6).
 export const amplitudeUp = (angle: number): number => cosDeg(angle / 2);
 
+// The amplitude of "down": the amplitude arrow's sideways reach, whose square is
+// chanceDown (lesson 6). The lessons never name the sine; it is just the reach.
+export const amplitudeDown = (angle: number): number => Math.sin((angle * Math.PI) / 360);
+
 // The chance that every one of `checks` equally spaced checks says "up" while the arrow
 // turns `turn` degrees in all: each piece turns turn / checks and survives with
 // chanceUp(turn / checks), and all of them must (lesson 8).

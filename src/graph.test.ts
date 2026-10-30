@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { path, place, sample, type Axis } from "./graph.ts";
+import { onCircle, path, place, sample, type Axis } from "./graph.ts";
 
 const time: Axis = { min: 0, max: 12, ticks: [], format: String, label: "time" };
 const chance: Axis = { min: 0, max: 1, ticks: [], format: String, label: "chance" };
@@ -19,4 +19,11 @@ test("a path moves to its first point and draws a line to each next one", () => 
 
 test("sampling includes both ends", () => {
   assert.deepEqual(sample((x) => 2 * x, 0, 12, 4), [[0, 0], [3, 6], [6, 12], [9, 18], [12, 24]]);
+});
+
+test("a point on a circle is turned clockwise from its top", () => {
+  const at = (turn: number) => onCircle(turn, [100, 100], 50).map((c) => Number(c.toFixed(9)));
+  assert.deepEqual(at(0), [100, 50]);
+  assert.deepEqual(at(90), [150, 100]);
+  assert.deepEqual(at(180), [100, 150]);
 });
