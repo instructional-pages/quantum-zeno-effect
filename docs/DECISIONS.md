@@ -111,3 +111,9 @@ starting the repo.
 - **Question:** Public or private repo?
 - **Choice:** Public from the first commit.
 - **Why:** Org rule; confirmed by the user when the repo was created.
+
+## 2026-10-30: Lesson outline
+
+- **Question:** What lessons does the course have, and in what order?
+- **Choice:** The ten lessons in `docs/LESSONS.md`, including its "Settled in review" choices: chance read from the arrow's height before the cos² form, degrees only, survival as "every check said up", and a "down" result doesn't end a run.
+- **Why:** Approved by the user in PR #1.

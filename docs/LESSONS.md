@@ -1,6 +1,6 @@
 # Lesson outline
 
-Draft, awaiting approval. Ten lessons: the first shows the effect with no explanation
+Approved 2026-10-30. Ten lessons: the first shows the effect with no explanation
 (paradox first), the next seven build the pieces that explain it from zero, the ninth is
 the real experiment and the tenth is the full sandbox. Every lesson is a few short text
 steps beside the live view (Next button), at least one predict-then-reveal check, and a
@@ -261,7 +261,7 @@ run 100.
 | Says why: short-time change grows quadratically, so frequent resets keep it near zero | 6 (chance is a square), 7 (small turns), 8 (adding up) | 7, 8 (the "why" choice), 10 |
 | Learns every idea used, from school arithmetic | angles 2, probability 3, cosine 3, squaring 6, multiplying chances 8 | each lesson's check |
 
-## Choices to review
+## Settled in review
 
 - **Chance read from the arrow's height first** ((1 + height) / 2, lesson 3), and the cos²
   amplitude form second (lesson 6). The height is visible on the sphere, so the first
