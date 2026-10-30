@@ -473,3 +473,44 @@ figure:not(.main) .math {
 figure:not(.main) .math .note {
   font-size: inherit;
 }
+
+/* The plot (lessons 1, 5, 8 and 10): one bright curve and its dot, on quiet axes, with
+   dashed upright marks. */
+.plot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.plot text {
+  fill: var(--muted);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+figure:not(.main) .plot text {
+  font-size: 0.625rem;
+}
+
+.plot .axis,
+.plot .tick {
+  fill: none;
+  stroke: var(--muted);
+}
+
+.plot .mark {
+  stroke: var(--muted);
+  stroke-dasharray: 5 5;
+}
+
+.plot .curve {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.plot .dot {
+  fill: var(--text);
+}

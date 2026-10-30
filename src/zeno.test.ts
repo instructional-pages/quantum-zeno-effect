@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, height, run, seeded, survival } from "./zeno.ts";
+import { amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, halfTurn, height, run, seeded, survival, turned } from "./zeno.ts";
 
 const round = (x: number, places: number) => Number(x.toFixed(places));
 
@@ -86,4 +86,13 @@ test("the arrow turns freely between checks and starts again from each answer", 
   ]);
   assert.equal(arrowAt(90, [], 0.5), 45);
   assert.equal(arrowAt(180, ["up", "up", "up", "up", "up", "up", "up", "up", "up", "up"], 0.3), 0);
+});
+
+test("left alone, the arrow turns speed × time, and a half turn is 180° of it", () => {
+  assert.equal(turned(45, 2), 90);
+  assert.equal(turned(45, halfTurn(45)), 180);
+  assert.equal(halfTurn(45), 4);
+  assert.equal(halfTurn(15), 12);
+  assert.equal(chanceUp(turned(45, 4)), 0);
+  assert.equal(chanceUp(turned(45, 8)), 1);
 });

@@ -160,3 +160,15 @@ starting the repo.
 - **Question:** Lesson 4 has a Check button on the sphere's arrow and runs that check twice. What does the Tally view count?
 - **Choice:** Before the sandbox, the checks of the arrow on the sphere: a check that moves the arrow starts the count afresh with its answer, so pressing Check again shows "3 checks in a row" all with one answer. In the sandbox, runs are fresh arrows at the set angle, as in lesson 3, checked twice: the bars count the first answers (with the chance marked) and the status line counts how often the second agreed. Moving the arrow by hand clears the tally.
 - **Why:** The repeated answer is the lesson's point, so the view that counts answers should show it, rather than sit empty until the sandbox. The second answer always matches, so a second pair of bars would only repeat the first.
+
+## 2026-10-30: How the Plot view is drawn (decided by Claude, pending review)
+
+- **Question:** Lessons 1, 5, 8 and 10 share a line plot. WebGL like the sphere, Canvas, or SVG?
+- **Choice:** SVG, rebuilt to the figure's size on each draw (`src/plot.ts`), with its arithmetic in a pure module (`src/graph.ts`). Linear axes with ticks, curves, dots and dashed upright marks labelled above the plot; the small view leaves out the axis names.
+- **Why:** A few hundred points drawn on demand need no GPU; SVG text is crisp at any size and the plot gets a readable label for screen readers, with no new dependency.
+
+## 2026-10-30: Lesson 5's sliders (decided by Claude, pending review)
+
+- **Question:** What ranges do lesson 5's speed and time take, and what does the plot show before the wave is taught?
+- **Choice:** Speed 15–90° per second in steps of 5, time 0–12 seconds in tenths, on a fixed 0–12 second plot, so the half turn (2 to 12 seconds) is always on it. Before the wave step the plot shows only a dot at the current time and chance; during the check it shows only its axes, and the arrow waits at the top.
+- **Why:** The dot lets the learner build the wave by dragging before seeing it whole; a fixed time axis keeps "faster speed, tighter wave" visible; hiding the plot and arrow keeps the check from answering itself.
