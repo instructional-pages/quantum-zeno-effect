@@ -123,3 +123,22 @@ starting the repo.
 - **Question:** At what moments do the N checks of a run happen?
 - **Choice:** Equally spaced, the last at the end of the run: check k at k/N of the way through. Lesson 1's "one check halfway through" is shown as a run of 2 checks (halfway and at the end), or by stopping the run halfway.
 - **Why:** It is the placement behind lesson 8's table (1 check → 0, 2 → 0.25) and Itano's prediction (lesson 9), and the arrow's final position always matches the last answer.
+
+## 2026-10-30: The first view
+
+- **Question:** Should the first lesson PR build the real WebGL2 Bloch sphere, or a 2D placeholder?
+- **Choice:** The real sphere, as a quiet wireframe: faint latitude lines and outline, the circle in use drawn bright, and the arrow as a solid shape on it.
+- **Why:** The user's choice: it is final work, so nothing is thrown away.
+
+## 2026-10-30: The sphere's viewpoint
+
+- **Question:** Can the learner turn the sphere?
+- **Choice:** No. A fixed view, turned 22° about the vertical and tipped 16° towards the viewer, so the circle in use reads as nearly round and the sphere still reads as 3D.
+- **Why:** The user's choice: nothing extra to teach or operate, and the useful view can't be lost.
+
+## 2026-10-30: Picture choices in checks (decided by Claude, pending review)
+
+- **Question:** Lesson 2's check picks "from three drawings". How does a check show them?
+- **Choice:** A choice prompt may carry one small SVG drawing per choice, shown on its button above the choice's letter (a, b, c); the reveal names the right letter. The sphere hides its arrow during that check.
+- **Why:** It extends the shared choice prompt without a new component, the letter keeps the reveal readable, and hiding the arrow keeps the learner from reading off the answer.
+
