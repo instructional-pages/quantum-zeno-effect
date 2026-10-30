@@ -1,5 +1,6 @@
 // The arithmetic behind the Plot view: values placed in a box on the screen, a line
-// through points, and a function sampled along an axis.
+// through points, and a function sampled along an axis; and, for the Amplitude circle, a
+// point on a circle.
 
 export type Point = [number, number];
 
@@ -42,3 +43,10 @@ export const sample = (f: (x: number) => number, min: number, max: number, n: nu
     const x = min + ((max - min) * k) / n;
     return [x, f(x)];
   });
+
+// The point `turn` degrees clockwise from the top of a circle of radius r round (cx, cy),
+// in screen pixels, y down.
+export function onCircle(turn: number, [cx, cy]: Point, r: number): Point {
+  const t = (turn * Math.PI) / 180;
+  return [cx + r * Math.sin(t), cy - r * Math.cos(t)];
+}

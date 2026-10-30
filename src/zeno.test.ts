@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, halfTurn, height, run, seeded, survival, turned } from "./zeno.ts";
+import { amplitudeDown, amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, halfTurn, height, run, seeded, survival, turned } from "./zeno.ts";
 
 const round = (x: number, places: number) => Number(x.toFixed(places));
 
@@ -21,6 +21,20 @@ test("45° per second for 4 seconds is a half turn: chance of up 0 (lesson 5's c
 test("the amplitude squared is the chance, at every angle (lesson 6)", () => {
   for (let angle = 0; angle <= 360; angle += 15) assert.ok(Math.abs(amplitudeUp(angle) ** 2 - chanceUp(angle)) < 1e-12);
   assert.equal(round(amplitudeUp(60) ** 2, 12), 0.75);
+});
+
+test("the amplitudes of up and down are at right angles: their squares add to 1 (lesson 6)", () => {
+  for (let angle = 0; angle <= 180; angle += 2) {
+    assert.ok(Math.abs(amplitudeDown(angle) ** 2 - chanceDown(angle)) < 1e-12);
+    assert.ok(Math.abs(amplitudeUp(angle) ** 2 + amplitudeDown(angle) ** 2 - 1) < 1e-12);
+  }
+  assert.deepEqual([0, 180].map(amplitudeDown), [0, 1]);
+  assert.equal(round(amplitudeDown(60), 12), 0.5);
+});
+
+test("an amplitude of up of 0.8 is a chance of 0.64, near 74° (lesson 6's check)", () => {
+  assert.equal(round(0.8 ** 2, 12), 0.64);
+  assert.equal(round(amplitudeUp(74) ** 2, 2), 0.64);
 });
 
 test("lesson 7's table: halving a small turn quarters the chance of down", () => {

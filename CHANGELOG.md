@@ -6,6 +6,20 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-30
+
+### Added
+
+- Lesson 6, "Amplitudes": squaring from scratch; the amplitude of each answer, whose
+  square is its chance; the chance of up as cos²(angle / 2), shown to agree with lesson
+  3's (1 + cos angle) / 2; why the angle is halved (up and down are 180° apart on the
+  sphere but 90° apart as amplitudes), with the amplitude of down and the two chances
+  adding up to 1; a check on the chance for an amplitude of 0.8; and a sandbox with the
+  angle, both drawings and both formulas.
+- The Amplitude circle view: a flat circle with up at the top and down to the right, its
+  arrow turned half the sphere's angle, and dashed lines marking the amplitudes of up and
+  down.
+
 ## [0.4.0] - 2026-10-30
 
 ### Added

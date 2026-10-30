@@ -15,11 +15,18 @@ export const runs = (tally: Tally): number => tally.up + tally.down;
 // The share of the runs that gave `answer`, or null before any run.
 export const fraction = (tally: Tally, answer: Answer): number | null => (runs(tally) ? tally[answer] / runs(tally) : null);
 
-// "0.50", "−0.71"; a value that rounds to zero is "0.00", never "−0.00".
-export function twoPlaces(x: number): string {
-  const text = x.toFixed(2);
-  return Number(text) === 0 ? "0.00" : text.replace("-", "−");
+// "0.50", "−0.71" (or "0.866" to three places); a value that rounds to zero is "0.00",
+// never "−0.00".
+export function toPlaces(x: number, places: number): string {
+  const text = x.toFixed(places);
+  return Number(text) === 0 ? (0).toFixed(places) : text.replace("-", "−");
 }
+
+export const twoPlaces = (x: number): string => toPlaces(x, 2);
+
+// An amplitude squared into its chance (lesson 6): "0.866² = 0.75". The amplitude keeps
+// three places, so squaring what is written gives the chance to two.
+export const squared = (a: number): string => `${toPlaces(a, 3)}² = ${twoPlaces(a * a)}`;
 
 // The chance of up worked out from a height `h`: "(1 + 0.50) / 2", or "(1 − 0.71) / 2"
 // rather than "(1 + −0.71) / 2".
