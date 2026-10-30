@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { degrees, turnShare } from "./angle.ts";
+import { degrees, pastTurns, turnShare } from "./angle.ts";
 
 test("degrees are whole, with the degree sign", () => {
   assert.equal(degrees(135), "135°");
@@ -23,4 +23,15 @@ test("other simple shares are written as fractions, and the rest left out", () =
   assert.equal(turnShare(120), "1/3 of a turn");
   assert.equal(turnShare(40), "");
   assert.equal(turnShare(137), "");
+});
+
+test("angles past a full turn are told as turns and the rest", () => {
+  assert.deepEqual([90, 359.6, 360, 450, 720, 1000].map(pastTurns), [
+    "",
+    "a full turn",
+    "a full turn",
+    "a full turn and 90° more",
+    "2 full turns",
+    "2 full turns and 280° more",
+  ]);
 });

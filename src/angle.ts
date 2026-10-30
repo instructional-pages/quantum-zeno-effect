@@ -23,3 +23,14 @@ export function turnShare(angle: number): string {
   const share = `${top}/${bottom}`;
   return NAMED[share] ?? (top === 1 ? `1/${bottom} of a turn` : `${share} of a turn`);
 }
+
+// How an angle past a full turn goes round: "a full turn and 90° more" for 450°; "" below
+// a full turn.
+export function pastTurns(angle: number): string {
+  const whole = Math.round(angle);
+  if (whole < 360) return "";
+  const turns = Math.floor(whole / 360);
+  const rest = whole - 360 * turns;
+  const counted = turns === 1 ? "a full turn" : `${turns} full turns`;
+  return rest ? `${counted} and ${degrees(rest)} more` : counted;
+}

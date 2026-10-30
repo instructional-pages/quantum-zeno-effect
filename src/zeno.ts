@@ -71,3 +71,11 @@ export function arrowAt(turn: number, answers: readonly Answer[], t: number): nu
   const lastCheck = n ? done / n : 0;
   return reset(answers[done - 1]) + turn * (t - lastCheck);
 }
+
+// Left alone, the arrow turns steadily from the top: after `time` seconds at `speed`
+// degrees per second it has turned speed × time (lesson 5).
+export const turned = (speed: number, time: number): number => speed * time;
+
+// The time one half turn takes, from up to down: 180° at `speed` degrees per second
+// (lesson 5).
+export const halfTurn = (speed: number): number => 180 / speed;

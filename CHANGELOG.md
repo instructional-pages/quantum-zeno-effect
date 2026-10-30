@@ -6,6 +6,17 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-30
+
+### Added
+
+- Lesson 5, "Turning": left alone, the arrow turns steadily from the top, with speed and
+  time sliders (nothing moves by itself) and its angle as speed × time; the Plot view,
+  first following the chance of up as a dot, then drawing the whole wave between 1 and 0;
+  one half turn (180° / speed) marked on it; the spinning top analogy and where it breaks;
+  a check on the chance of up after 4 seconds at 45° per second; and a sandbox with speed,
+  time and the plot.
+
 ## [0.3.0] - 2026-10-30
 
 ### Added
