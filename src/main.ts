@@ -3,6 +3,7 @@
 
 import { mountLesson, type Lesson } from "./lesson.ts";
 import { lesson2 } from "./lesson2.ts";
+import { lesson3 } from "./lesson3.ts";
 import { nextHash, parseRoute } from "./route.ts";
 
 const TITLES = [
@@ -18,7 +19,10 @@ const TITLES = [
   "The sandbox",
 ];
 // The lessons built so far, by number.
-const LESSONS = new Map<number, Lesson>([[2, lesson2]]);
+const LESSONS = new Map<number, Lesson>([
+  [2, lesson2],
+  [3, lesson3],
+]);
 const BUILT = new Set(LESSONS.keys());
 const COURSE = "The Quantum Zeno Effect";
 

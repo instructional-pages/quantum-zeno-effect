@@ -142,3 +142,15 @@ starting the repo.
 - **Choice:** A choice prompt may carry one small SVG drawing per choice, shown on its button above the choice's letter (a, b, c); the reveal names the right letter. The sphere hides its arrow during that check.
 - **Why:** It extends the shared choice prompt without a new component, the letter keeps the reveal readable, and hiding the arrow keeps the learner from reading off the answer.
 
+
+## 2026-10-30: What a run does in lesson 3 (decided by Claude, pending review)
+
+- **Question:** Lesson 3's runs check the arrow before lesson 4 explains checking. What does the learner see?
+- **Choice:** Each run is a fresh arrow at the set angle, checked once; the arrow on the sphere stays where it is, and only the tally (and its last answer) changes. Moving the angle clears the tally.
+- **Why:** It shows chances without teaching the jump to the answer a lesson early, and a tally only means something for one angle.
+
+## 2026-10-30: Fractions as typed answers (decided by Claude, pending review)
+
+- **Question:** Lesson 3's answer is ¾. Must the learner type 0.75?
+- **Choice:** A typed prediction may also be a fraction ("3/4"), read as its value.
+- **Why:** Chances in the lessons are worked out as fractions, so marking "3/4" wrong would be unfair.

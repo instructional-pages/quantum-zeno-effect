@@ -106,6 +106,24 @@ export function arrow(angle: number, width = 0.035, head = 0.16): Vec3[] {
   return [a, b, c, a, c, d, corner(neck, 2.6 * width, -1), corner(neck, 2.6 * width, 1), along];
 }
 
+// The vertical axis, from the top to the bottom, that the arrow's height is read on.
+export const axis = (): [Vec3, Vec3][] => [[UP, [0, -1, 0]]];
+
+// The straight line from `from` to `to` as dashes `dash` long with gaps as long between
+// them, starting with a dash; none when the two points meet.
+export function dashes(from: Vec3, to: Vec3, dash = 0.05): [Vec3, Vec3][] {
+  const span = Math.hypot(to[0] - from[0], to[1] - from[1], to[2] - from[2]);
+  const pieces = Math.ceil(span / dash - 1e-9);
+  const at = (k: number): Vec3 => add(from, scale(add(to, scale(from, -1)), Math.min(k * dash, span) / span));
+  return Array.from({ length: Math.ceil(pieces / 2) }, (_, k): [Vec3, Vec3] => [at(2 * k), at(2 * k + 1)]);
+}
+
+// Where the arrow's height meets the axis: straight across from its tip.
+export const heightFoot = (angle: number): Vec3 => [0, arrowTip(angle)[1], 0];
+
+// The dashed line from the arrow's tip across to the axis (lesson 3).
+export const heightLine = (angle: number): [Vec3, Vec3][] => dashes(arrowTip(angle), heightFoot(angle));
+
 // Lines behind the sphere's centre are drawn dimmer, down to `back` of their brightness
 // at the far side, so the shape reads as round without hiding anything.
 export const depthFade = (p: Vec3, back = 0.3): number => back + ((1 - back) * (1 + dot(p, TO_CAMERA))) / 2;

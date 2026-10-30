@@ -1,4 +1,4 @@
-// Small DOM helpers shared by the lessons: sliders, view figures, and the linked-view
+// Small DOM helpers shared by the lessons: sliders, buttons, view figures, and the linked-view
 // layout where one view is main and the others sit small beside it.
 
 export const span = (text: string, className = "") => Object.assign(document.createElement("span"), { textContent: text, className });
@@ -28,6 +28,17 @@ export function addSlider(
     onInput(x);
   });
   return input;
+}
+
+// A row of buttons, each with its label and what a click does.
+export function addButtons(parent: HTMLElement, buttons: [string, () => void][]) {
+  const row = Object.assign(document.createElement("div"), { className: "buttons" });
+  for (const [text, onClick] of buttons) {
+    const button = Object.assign(document.createElement("button"), { type: "button", textContent: text });
+    button.addEventListener("click", onClick);
+    row.append(button);
+  }
+  parent.append(row);
 }
 
 export interface ViewSpec {

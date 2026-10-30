@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { DISTANCE, TO_CAMERA, arc, arrow, arrowTip, camera, depthFade, outline, toScreen, type Vec3 } from "./sphere.ts";
+import { DISTANCE, TO_CAMERA, arc, arrow, arrowTip, camera, dashes, depthFade, heightLine, outline, toScreen, type Vec3 } from "./sphere.ts";
 
 const close = (a: number[], b: number[]) => a.every((x, k) => Math.abs(x - b[k]!) < 1e-9);
 const length = (p: Vec3) => Math.hypot(...p);
@@ -58,4 +58,21 @@ test("the arrow runs from the centre to its tip, in the plane of its circle", ()
 test("the near side is drawn brightest and the far side dimmest", () => {
   assert.ok(Math.abs(depthFade(TO_CAMERA) - 1) < 1e-9);
   assert.ok(Math.abs(depthFade([-TO_CAMERA[0], -TO_CAMERA[1], -TO_CAMERA[2]]) - 0.3) < 1e-9);
+});
+
+test("dashes alternate with gaps along the line, the first starting at its beginning", () => {
+  const pieces = dashes([0, 0, 0], [0.5, 0, 0], 0.1);
+  assert.equal(pieces.length, 3);
+  assert.ok(close(pieces[0]![0], [0, 0, 0]));
+  assert.ok(close(pieces[1]![0], [0.2, 0, 0]));
+  assert.ok(close(pieces[2]![1], [0.5, 0, 0]));
+  assert.equal(dashes([0, 0, 0], [0, 0, 0]).length, 0);
+});
+
+test("the height line runs level from the arrow's tip to the axis", () => {
+  const pieces = heightLine(60);
+  assert.ok(close(pieces[0]![0], arrowTip(60)));
+  assert.ok(pieces.flat().every((p) => Math.abs(p[1] - 0.5) < 1e-9 && p[0] >= -1e-9));
+  assert.ok(Math.abs(pieces.at(-1)![1][0]) < 0.05);
+  assert.equal(heightLine(180).length, 0);
 });

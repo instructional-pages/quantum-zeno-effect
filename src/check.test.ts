@@ -13,6 +13,14 @@ test("parseAnswer reads numbers and rejects the rest", () => {
   assert.equal(parseAnswer("four"), null);
 });
 
+test("parseAnswer reads a fraction as its value", () => {
+  assert.equal(parseAnswer("3/4"), 0.75);
+  assert.equal(parseAnswer(" 3 / 4 "), 0.75);
+  assert.equal(parseAnswer("3/"), null);
+  assert.equal(parseAnswer("1/0"), null);
+  assert.equal(parseAnswer("1/2/3"), null);
+});
+
 test("reveal waits for a prediction in every prompt", () => {
   const two = [typed(4), typed(6)];
   assert.equal(canReveal(two, ["4", ""]), false);
@@ -31,6 +39,7 @@ test("isRight compares the typed number or the picked choice with the answer", (
   assert.equal(isRight(typed(7), "7"), true);
   assert.equal(isRight(typed(7), "7.0"), true);
   assert.equal(isRight(typed(7), "6"), false);
+  assert.equal(isRight(typed(0.75), "3/4"), true);
   assert.equal(isRight(picked("no"), "no"), true);
   assert.equal(isRight(picked("no"), "yes"), false);
 });
