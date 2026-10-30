@@ -1,7 +1,7 @@
 // Plain WebGL2 drawing of the sphere view: one pale color, lines and flat triangles, each
 // vertex with its own brightness, added up on black. Drawn on demand, never per frame.
 
-import { arc, arrow, camera, depthFade, outline, RIGHT, shape, toScreen, track, UP, type Vec3 } from "./sphere.ts";
+import { arc, arrow, axis, camera, depthFade, heightLine, outline, RIGHT, shape, toScreen, track, UP, type Vec3 } from "./sphere.ts";
 
 const VERTEX = `#version 300 es
 layout(location = 0) in vec3 a_point;
@@ -23,12 +23,15 @@ void main() {
 
 // Brightness from 0 to 1: the sphere's shape is quiet, its outline a little less so, the
 // circle in use clear (and not faded with depth, so it stands out from the outline it
-// nearly follows), and the arrow brightest. The angle's arc sits between.
+// nearly follows), and the arrow brightest. The angle's arc and the height's dashed line
+// sit between, on an axis a little brighter than the shape.
 const SHAPE_ALPHA = 0.16;
 const OUTLINE_ALPHA = 0.2;
 const TRACK_ALPHA = 0.7;
 const ARC_ALPHA = 0.6;
 const ARC_RADIUS = 0.3;
+const AXIS_ALPHA = 0.3;
+const HEIGHT_ALPHA = 0.75;
 const ARROW_ALPHA = 0.95;
 
 // Four floats per vertex: x, y, z, alpha.
@@ -39,6 +42,8 @@ export interface SphereScene {
   angle: number | null;
   // Mark the angle with an arc from the top to the arrow.
   arc: boolean;
+  // Mark the arrow's height with the vertical axis and a dashed line across to it.
+  height?: boolean;
 }
 
 export interface SphereView {
@@ -85,7 +90,7 @@ export function createSphereView(canvas: HTMLCanvasElement): SphereView | null {
   const still = [...lines(shape(), SHAPE_ALPHA), ...lines(outline(), OUTLINE_ALPHA, false), ...lines(track(), TRACK_ALPHA, false)];
 
   return {
-    draw({ angle, arc: marked }) {
+    draw({ angle, arc: marked, height: level }) {
       const dpr = window.devicePixelRatio || 1;
       const width = Math.round(canvas.clientWidth * dpr);
       const height = Math.round(canvas.clientHeight * dpr);
@@ -98,7 +103,12 @@ export function createSphereView(canvas: HTMLCanvasElement): SphereView | null {
       gl.clear(gl.COLOR_BUFFER_BIT);
 
       const triangles = angle === null ? [] : arrow(angle).flatMap((p) => [...p, ARROW_ALPHA]);
-      const segments = [...still, ...(angle !== null && marked && angle > 0 ? lines(arc([0, 0, 0], UP, RIGHT, ARC_RADIUS, 0, angle), ARC_ALPHA, false) : [])];
+      const segments = [
+        ...still,
+        ...(angle !== null && marked && angle > 0 ? lines(arc([0, 0, 0], UP, RIGHT, ARC_RADIUS, 0, angle), ARC_ALPHA, false) : []),
+        ...(level ? lines(axis(), AXIS_ALPHA, false) : []),
+        ...(angle !== null && level ? lines(heightLine(angle), HEIGHT_ALPHA, false) : []),
+      ];
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([...triangles, ...segments]), gl.STREAM_DRAW);
       gl.drawArrays(gl.TRIANGLES, 0, triangles.length / STRIDE);
       gl.drawArrays(gl.LINES, triangles.length / STRIDE, segments.length / STRIDE);

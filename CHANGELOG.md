@@ -6,6 +6,22 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-30
+
+### Added
+
+- Lesson 3, "Chances": a chance as the share of many tries; the arrow's height, read off
+  a dashed line across to the vertical axis; chance of up = (1 + height) / 2; the cosine
+  as the name for that height; a check on the chance of up at 60°; and a sandbox with the
+  angle, Run once and Run 100.
+- The Tally view: two bars counting the up and down answers of many runs, with their
+  shares and the chance marked as a dashed line across each.
+- The Math view: the lesson's formula with the live numbers written in.
+
+### Changed
+
+- A typed prediction may be a fraction, such as 3/4.
+
 ## [0.1.0] - 2026-10-30
 
 ### Added

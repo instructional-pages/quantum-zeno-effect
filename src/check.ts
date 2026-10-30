@@ -7,11 +7,13 @@ export type Prompt =
   | { label: string; answer: number }
   | { label: string; choices: string[]; answer: string; pictures?: string[] };
 
-// A typed prediction as a number, or null when it isn't one ("", "abc").
+// A typed prediction as a number, or null when it isn't one ("", "abc"). A fraction such
+// as "3/4" counts as its value, since chances are often worked out as fractions.
 export function parseAnswer(text: string): number | null {
-  const trimmed = text.trim();
-  if (trimmed === "") return null;
-  const x = Number(trimmed);
+  const parts = text.split("/").map((part) => part.trim());
+  if (parts.length > 2 || parts.includes("")) return null;
+  const [top, bottom = 1] = parts.map(Number) as [number, number?];
+  const x = top / bottom;
   return Number.isFinite(x) ? x : null;
 }
 
