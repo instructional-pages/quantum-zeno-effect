@@ -5,6 +5,6 @@ quantum system often enough keeps it from changing. A rotating state on a 3D Blo
 is interrupted by measurements you set, beside a plot of survival probability vs.
 measurement rate, with the math shown next to the pictures.
 
-Status: not built yet; see [docs/BRIEF.md](docs/BRIEF.md).
+Status: not built yet. Spec in [docs/BRIEF.md](docs/BRIEF.md); lesson outline (draft) in [docs/LESSONS.md](docs/LESSONS.md).
 
 License: [MIT](LICENSE).
