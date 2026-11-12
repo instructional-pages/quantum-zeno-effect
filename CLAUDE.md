@@ -20,7 +20,7 @@ asking the user anything.
 
 - Anything beyond a learning page ("That's it").
 - Quantum interpretations (Copenhagen, many-worlds, what "collapse" really is).
-- Everything in the org's Not doing list (`~/projects/instructional-pages/CLAUDE.md`).
+- Everything in the org's Not doing list (`~/organizations/instructional-pages/CLAUDE.md`).
 
 ## Constraints
 

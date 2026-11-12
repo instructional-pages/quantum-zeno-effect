@@ -72,7 +72,7 @@ course is the way to learn it.
 
 - Anything beyond a learning page ("That's it").
 - Quantum interpretations (Copenhagen, many-worlds, what "collapse" really is).
-- Everything in the org's Not doing list (`~/projects/instructional-pages/CLAUDE.md`).
+- Everything in the org's Not doing list (`~/organizations/instructional-pages/CLAUDE.md`).
 
 ## Constraints
 
@@ -84,7 +84,7 @@ course is the way to learn it.
 - Topic: the quantum Zeno effect.
 - Form: a GitHub Pages site for learning about it, like `higher-dimensions`.
 - GitHub owner: the `instructional-pages` organization. Its shared rules
-  (`~/projects/instructional-pages/CLAUDE.md`) apply: guided lessons then a sandbox,
+  (`~/organizations/instructional-pages/CLAUDE.md`) apply: guided lessons then a sandbox,
   predict-then-reveal, dark minimal look, TypeScript + Vite, MIT, no analytics, English.
 - Learner: a complete beginner, with no physics or quantum background; the course teaches
   every idea it needs.
