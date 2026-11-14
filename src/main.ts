@@ -2,6 +2,7 @@
 // change rebuilds the page from scratch. Nothing is saved.
 
 import { mountLesson, type Lesson } from "./lesson.ts";
+import { lesson1 } from "./lesson1.ts";
 import { lesson2 } from "./lesson2.ts";
 import { lesson3 } from "./lesson3.ts";
 import { lesson4 } from "./lesson4.ts";
@@ -25,6 +26,7 @@ const TITLES = [
 ];
 // The lessons built so far, by number.
 const LESSONS = new Map<number, Lesson>([
+  [1, lesson1],
   [2, lesson2],
   [3, lesson3],
   [4, lesson4],
