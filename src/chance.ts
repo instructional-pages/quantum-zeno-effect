@@ -31,3 +31,10 @@ export const squared = (a: number): string => `${toPlaces(a, 3)}² = ${twoPlaces
 // The chance of up worked out from a height `h`: "(1 + 0.50) / 2", or "(1 − 0.71) / 2"
 // rather than "(1 + −0.71) / 2".
 export const chanceSum = (h: number): string => `(1 ${twoPlaces(h).startsWith("−") ? "−" : "+"} ${twoPlaces(Math.abs(h))}) / 2`;
+
+// A small chance as lesson 7 writes it: to three places, or four below 0.01, so that 0.0076
+// keeps two figures rather than rounding to 0.008.
+export const smallChance = (x: number): string => toPlaces(x, x < 0.01 ? 4 : 3);
+
+// An amplitude squared into a small chance (lesson 7): "0.174² = 0.030".
+export const squaredSmall = (a: number): string => `${toPlaces(a, 3)}² = ${smallChance(a * a)}`;

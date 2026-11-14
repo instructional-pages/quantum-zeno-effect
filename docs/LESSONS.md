@@ -22,7 +22,7 @@ Every analogy is marked **Analogy** in the text and followed by **Where it break
 | 4 | Checking | Sphere | Tally, Math | angle, run, **check** |
 | 5 | Turning | Sphere | Plot (chance vs. time), Math | **speed, time** |
 | 6 | Amplitudes | Sphere | Amplitude circle, Math | angle |
-| 7 | Small turns barely count | Amplitude circle | Table, Math | angle |
+| 7 | Small turns barely count | Amplitude circle | Table, Plot (chance of down, zoomed), Math | angle |
 | 8 | Checking often | Sphere | Plot (survival vs. checks), Math | speed, time, **check count**, run |
 | 9 | A real experiment | Plot (Itano data) | Sphere | check count |
 | 10 | The sandbox | Learner's choice | all others | all |
@@ -33,7 +33,8 @@ New controls are in **bold**. Views:
   top and bottom) is ever used; the rest is drawn faint. The top is "up", the bottom
   "down".
 - **Plot:** a line plot. In lessons 1, 8 and 10 it is the survival chance against the
-  number of checks; in lesson 5, the chance of "up" against time.
+  number of checks; in lesson 5, the chance of "up" against time; in lesson 7, the chance
+  of "down" against the turn, zoomed in near zero.
 - **Tally:** two bars counting "up" and "down" answers over many runs, with their
   fractions.
 - **Amplitude circle:** a flat circle where the amplitude angle is half the sphere angle

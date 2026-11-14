@@ -43,3 +43,15 @@ test("isRight compares the typed number or the picked choice with the answer", (
   assert.equal(isRight(picked("no"), "no"), true);
   assert.equal(isRight(picked("no"), "yes"), false);
 });
+
+test("a typed number may miss an \"about\" answer by up to its allowance", () => {
+  const about = { label: "Chance", answer: 0.0076, within: 0.001 };
+  assert.equal(isRight(about, "0.0076"), true);
+  assert.equal(isRight(about, "0.0075"), true);
+  assert.equal(isRight(about, "0.03/4"), true);
+  assert.equal(isRight(about, "0.0086"), true);
+  assert.equal(isRight(about, "0.0066"), true);
+  assert.equal(isRight(about, "0.015"), false);
+  assert.equal(isRight(about, "0.03"), false);
+  assert.equal(isRight(about, ""), false);
+});
