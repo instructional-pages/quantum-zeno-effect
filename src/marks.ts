@@ -14,9 +14,10 @@ const ENDS: { at: Vec3; text: string; withHeight: string }[] = [
 ];
 
 // Adds the labels to `figure`; the returned function places them for an arrow at `angle`.
-export function heightMarks(figure: HTMLElement, view: SphereView): (angle: number, shown: boolean) => void {
+// `names` replaces "up" and "down" (lesson 9's two levels).
+export function heightMarks(figure: HTMLElement, view: SphereView, names?: [string, string]): (angle: number, shown: boolean) => void {
   const marks = figure.appendChild(Object.assign(document.createElement("div"), { className: "marks" }));
-  const ends = ENDS.map(({ text }) => marks.appendChild(span(text, "label")));
+  const ends = ENDS.map(({ text }, k) => marks.appendChild(span(names?.[k] ?? text, "label")));
   const level = marks.appendChild(span("", "label"));
   const place = (label: HTMLElement, at: Vec3) => {
     const [left, top] = view.screen(at);
@@ -26,7 +27,7 @@ export function heightMarks(figure: HTMLElement, view: SphereView): (angle: numb
   return (angle, shown) => {
     ends.forEach((label, k) => {
       place(label, ENDS[k]!.at);
-      label.textContent = shown ? ENDS[k]!.withHeight : ENDS[k]!.text;
+      label.textContent = shown ? ENDS[k]!.withHeight : (names?.[k] ?? ENDS[k]!.text);
     });
     // The height's value beside the axis, on the side away from the arrow, except at the
     // top and bottom, which their own labels give.

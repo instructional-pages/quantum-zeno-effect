@@ -1,6 +1,6 @@
-// The Plot view (lessons 1, 5, 8 and 10): a line plot drawn as SVG to the figure's size,
-// with its axes and their ticks, curves, dots on them, hollow rings for counted results,
-// and dashed upright marks, each with a label above the plot.
+// The Plot view (lessons 1, 5, 8, 9 and 10): a line plot drawn as SVG to the figure's size,
+// with its axes and their ticks, curves, dots on them, hollow rings for counted results
+// (with bars for their error), and dashed upright marks, each with a label above the plot.
 
 import { path, place, type Axis, type Box, type Point } from "./graph.ts";
 
@@ -12,6 +12,9 @@ export interface PlotScene {
   // Counted results, such as the share of 100 runs that survived (lesson 8): rings, so
   // they read apart from the dots by shape, not hue.
   rings?: Point[];
+  // How far each ring's value may be off, drawn as an upright bar through it (lesson 9's
+  // measuring error), stopping at the bottom axis; none when absent.
+  spread?: number;
   marks: { x: number; label: string }[];
 }
 
@@ -31,7 +34,7 @@ export function createPlotView(figure: HTMLElement, xAxis: Axis, yAxis: Axis): P
   figure.append(svg);
 
   return {
-    draw({ label, curves, dots, rings = [], marks }) {
+    draw({ label, curves, dots, rings = [], spread = 0, marks }) {
       const width = svg.clientWidth;
       const height = svg.clientHeight;
       const main = figure.classList.contains("main");
@@ -63,6 +66,11 @@ export function createPlotView(figure: HTMLElement, xAxis: Axis, yAxis: Axis): P
       for (const curve of curves) parts.push(`<path class="curve" d="${path(curve, xAxis, yAxis, box)}"/>`);
       for (const ring of rings) {
         const [x, y] = at(ring);
+        if (spread) {
+          const [, top] = at([ring[0], ring[1] + spread]);
+          const [, low] = at([ring[0], Math.max(yAxis.min, ring[1] - spread)]);
+          parts.push(`<line class="bar" x1="${x}" y1="${top}" x2="${x}" y2="${low}"/>`);
+        }
         parts.push(`<circle class="ring" cx="${x}" cy="${y}" r="${main ? 7 : 4.5}"/>`);
       }
       for (const dot of dots) {

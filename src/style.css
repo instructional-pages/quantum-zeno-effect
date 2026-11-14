@@ -479,7 +479,7 @@ figure:not(.main) .math .note {
   font-size: inherit;
 }
 
-/* The plot (lessons 1, 5, 8 and 10): one bright curve and its dot, on quiet axes, with
+/* The plot (lessons 1, 5, 8, 9 and 10): one bright curve and its dot, on quiet axes, with
    dashed upright marks and hollow rings for counted runs. */
 .plot {
   position: absolute;
@@ -522,6 +522,11 @@ figure:not(.main) .plot text {
 
 .plot .ring {
   fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.plot .bar {
   stroke: var(--text);
   stroke-width: 1.5;
 }

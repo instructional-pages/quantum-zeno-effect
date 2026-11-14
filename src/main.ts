@@ -10,6 +10,7 @@ import { lesson5 } from "./lesson5.ts";
 import { lesson6 } from "./lesson6.ts";
 import { lesson7 } from "./lesson7.ts";
 import { lesson8 } from "./lesson8.ts";
+import { lesson9 } from "./lesson9.ts";
 import { nextHash, parseRoute } from "./route.ts";
 
 const TITLES = [
@@ -34,6 +35,7 @@ const LESSONS = new Map<number, Lesson>([
   [6, lesson6],
   [7, lesson7],
   [8, lesson8],
+  [9, lesson9],
 ]);
 const BUILT = new Set(LESSONS.keys());
 const COURSE = "The Quantum Zeno Effect";
