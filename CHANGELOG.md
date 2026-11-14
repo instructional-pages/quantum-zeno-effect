@@ -6,6 +6,19 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-14
+
+### Added
+
+- Lesson 1, "Watching stops it": the paradox before any explanation. Run plays a
+  4-second run in which the arrow turns from the top to the bottom; then with a check
+  halfway and at the end, where it jumps to up or down at random; then with 1, 2, 5 and
+  20 checks, each Run adding 100 runs to the plot as a ring for the share that stayed up.
+  A check asks where the arrow ends with 100 checks before it is run; the lesson names
+  the quantum Zeno effect, sets it against "a watched pot never boils", and ends in a
+  sandbox with Run and 1 to 100 checks. With reduced motion, Run doesn't play: a time
+  slider steps through the run instead.
+
 ## [0.7.0] - 2026-11-14
 
 ### Added

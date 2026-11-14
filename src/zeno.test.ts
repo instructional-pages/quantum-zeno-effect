@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { amplitudeDown, amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, halfTurn, height, run, seeded, survival, turned } from "./zeno.ts";
+import { amplitudeDown, amplitudeUp, arrowAt, chanceDown, chanceUp, check, checkTwice, endsDown, halfTurn, height, run, seeded, soFar, survival, turned } from "./zeno.ts";
 
 const round = (x: number, places: number) => Number(x.toFixed(places));
 
@@ -109,4 +109,15 @@ test("left alone, the arrow turns speed × time, and a half turn is 180° of it"
   assert.equal(halfTurn(15), 12);
   assert.equal(chanceUp(turned(45, 4)), 0);
   assert.equal(chanceUp(turned(45, 8)), 1);
+});
+
+test("soFar counts the checks made and finds the first down", () => {
+  const answers = ["up", "down", "up", "down"] as const;
+  assert.deepEqual(soFar(answers, 0), { done: 0, down: 0 });
+  assert.deepEqual(soFar(answers, 0.25), { done: 1, down: 0 });
+  assert.deepEqual(soFar(answers, 0.5), { done: 2, down: 2 });
+  assert.deepEqual(soFar(answers, 1), { done: 4, down: 2 });
+  // 0.3 × 10 is just under 3 in floating point; check 3 has still happened.
+  assert.deepEqual(soFar(Array(10).fill("up"), 0.3), { done: 3, down: 0 });
+  assert.deepEqual(soFar([], 0.7), { done: 0, down: 0 });
 });

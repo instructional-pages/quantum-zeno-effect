@@ -76,6 +76,14 @@ export function arrowAt(turn: number, answers: readonly Answer[], t: number): nu
   return reset(answers[done - 1]) + turn * (t - lastCheck);
 }
 
+// Where a run stands a fraction `t` (0 to 1) of the way through: how many checks have
+// happened, and the first "down" among them (its number from 1), or 0 when all so far
+// said up (lessons 1 and 8).
+export function soFar(answers: readonly Answer[], t: number): { done: number; down: number } {
+  const done = Math.min(Math.floor(t * answers.length + 1e-9), answers.length);
+  return { done, down: answers.slice(0, done).indexOf("down") + 1 };
+}
+
 // Left alone, the arrow turns steadily from the top: after `time` seconds at `speed`
 // degrees per second it has turned speed × time (lesson 5).
 export const turned = (speed: number, time: number): number => speed * time;

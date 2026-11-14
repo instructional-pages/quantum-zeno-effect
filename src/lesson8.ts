@@ -13,7 +13,7 @@ import { heightMarks } from "./marks.ts";
 import { createPlotView } from "./plot.ts";
 import { addButtons, addSlider } from "./ui.ts";
 import { createSphereView } from "./view.ts";
-import { arrowAt, chanceUp, run, survival, turned, type Answer } from "./zeno.ts";
+import { arrowAt, chanceUp, run, soFar, survival, turned, type Answer } from "./zeno.ts";
 
 // Every run lasts 4 seconds; at the starting speed that is one half turn (lesson 5).
 const RUN = 4;
@@ -66,14 +66,6 @@ interface History {
   real: boolean;
 }
 
-// Where a run stands at `time`: how many checks have happened, and the first "down" among
-// them (its number from 1), or 0 when all so far said up.
-function soFar(answers: readonly Answer[], time: number): { done: number; down: number } {
-  const done = Math.min(Math.floor((time / RUN) * answers.length + 1e-9), answers.length);
-  const first = answers.slice(0, done).indexOf("down");
-  return { done, down: first + 1 };
-}
-
 // The Math view's lines, HTML.
 function mathLines(shown: Shown, turn: number, n: number, time: number, current: History, counted: Counted | undefined): string[] {
   const piece = turn / n;
@@ -94,7 +86,7 @@ function mathLines(shown: Shown, turn: number, n: number, time: number, current:
     if (counted) lines.push(...countLines(counted));
     return lines;
   }
-  const { done, down } = soFar(current.answers, time);
+  const { done, down } = soFar(current.answers, time / RUN);
   const lines = [`time ${seconds(time)} of ${seconds(RUN)} · ${checksText(n)}, one every ${seconds(RUN / n, 2)}`];
   if (!current.real) lines.push(`<span class="note">showing a run where every check says up</span>`);
   lines.push(
