@@ -57,8 +57,8 @@ export function figure({ caption, label }: ViewSpec): HTMLElement {
 
 // Lays out the figures in `views`: the first is main, filling the left; the others are
 // buttons that swap themselves in. Only classes change, so each canvas keeps its WebGL
-// context.
-export function linkViews(views: HTMLElement) {
+// context. Returns a function that makes figure `i` the main one (lesson 10's recaps).
+export function linkViews(views: HTMLElement): (i: number) => void {
   const figures = [...views.querySelectorAll<HTMLElement>(":scope > figure")];
   views.style.gridTemplateRows = `repeat(${Math.max(1, figures.length - 1)}, 1fr)`;
   const makeMain = (main: HTMLElement) => {
@@ -85,4 +85,5 @@ export function linkViews(views: HTMLElement) {
     });
   }
   makeMain(figures[0]!);
+  return (i) => makeMain(figures[i]!);
 }

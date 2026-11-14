@@ -3,6 +3,7 @@
 
 import { mountLesson, type Lesson } from "./lesson.ts";
 import { lesson1 } from "./lesson1.ts";
+import { lesson10 } from "./lesson10.ts";
 import { lesson2 } from "./lesson2.ts";
 import { lesson3 } from "./lesson3.ts";
 import { lesson4 } from "./lesson4.ts";
@@ -36,6 +37,7 @@ const LESSONS = new Map<number, Lesson>([
   [7, lesson7],
   [8, lesson8],
   [9, lesson9],
+  [10, lesson10],
 ]);
 const BUILT = new Set(LESSONS.keys());
 const COURSE = "The Quantum Zeno Effect";

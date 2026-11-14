@@ -57,7 +57,7 @@ export function createAmplitudeView(figure: HTMLElement): AmplitudeView {
           const [lx, ly] = onCircle(half < 20 ? half + 12 : half / 2, c, arc + 16);
           parts.push(
             `<path class="arc" d="M${f(onCircle(0, c, arc))}A${arc.toFixed(1)} ${arc.toFixed(1)} 0 0 1 ${f(onCircle(half, c, arc))}"/>`,
-            `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${half}°</text>`,
+            `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle">${Number(half.toFixed(1))}°</text>`,
           );
         }
         // The amplitude of up is the tip's height, read off the upright axis, labelled
