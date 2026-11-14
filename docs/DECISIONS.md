@@ -239,3 +239,15 @@ starting the repo.
 - **Choice:** The flashes axis doubles at each step (1, 2, 4, …, 64, evenly spaced, as in the paper's Fig. 3), called "each step doubles them"; logarithms aren't named. The curve joins the formula at every whole number of flashes (1.5 flashes doesn't exist, and below 2 a fractional power of a negative cos has no value). Views: Plot (main), Sphere (one ion, level 1 at the top and level 2 at the bottom), Table (the paper's Table I, filled in as the lesson goes: formula, measured, full calculation) and Math. The flashes slider moves in powers of two; Next waits for one run of an ion and for the formula at 1, 2, 4, 8 and 16 flashes; the question's step shows 32 but not 64. The Plot view gains optional error bars through its rings (`spread`), stopping at the bottom axis.
 - **Why:** On a plain 1 to 64 axis, 1, 2, 4 and 8 crowd together at the left. Filling in before the question, and drawing the measured points only after it, keeps the check from answering itself.
 
+
+## 2026-11-14: Lesson 10's recaps and final round (decided by Claude, pending review)
+
+- **Question:** How do the six recap screens show "each one sentence with its view", and what is the unseen speed and time?
+- **Choice:** Each recap step brings its view to the front (a step may now name its main view): Sphere for the arrow, chance, check and turning, the Amplitude circle for amplitude, the Math view for small turns; each keeps a live slider (and Check for the check recap). The final round is 80° a second for 3 seconds, a 240° turn: 4 checks survive with chance 0.32, 8 with 0.57. The "why" round reuses lesson 8's three ideas, reworded and reordered so the answer is (c), not (b) again.
+- **Why:** A recap that only describes a view doesn't show it. 240° is past the half turn every guided lesson used, so the learner applies the reasoning rather than recalling lesson 8's numbers; the per-check loss still drops to about a quarter (0.25 to 0.067).
+
+## 2026-11-14: Lesson 10's sandbox controls (decided by Claude, pending review)
+
+- **Question:** Lesson 8's time slider scrubbed a fixed 4-second run; lesson 10 adds the total time. How does the learner see a single run?
+- **Choice:** The total time (1 to 6 s, in half seconds) sets the run's length, and Run once plays it on the sphere in that time, as lesson 1 does (under reduced motion, a time slider steps through it instead). The plot's curve joins whole numbers of checks only. The Amplitude circle shows one piece of the run (none when a single piece passes a half turn). A new speed or total time clears the rings.
+- **Why:** Two time sliders (one for length, one for scrubbing) would read as the same thing. Past a half turn, the formula at a fraction of a check gives values no run can have, so joining only whole counts keeps the curve honest; at short turns it looks the same as lesson 8's.

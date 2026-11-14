@@ -20,6 +20,9 @@ export interface Step {
   check?: Check;
   // Next waits until the lesson calls `done` for this step.
   hold?: boolean;
+  // The view this step makes main, by its place in the lesson's views; the learner's
+  // choice stays when absent.
+  view?: number;
 }
 
 export interface Lesson {
@@ -49,7 +52,7 @@ export function mountLesson(root: HTMLElement, n: number, lesson: Lesson, next: 
     <div class="sliders"></div>
     <nav><button type="button">Back</button><button type="button">Next</button></nav>`;
   root.append(views, aside);
-  linkViews(views);
+  const makeMain = linkViews(views);
 
   const $ = (selector: string) => aside.querySelector<HTMLElement>(selector)!;
   $("h1").textContent = lesson.title;
@@ -75,6 +78,7 @@ export function mountLesson(root: HTMLElement, n: number, lesson: Lesson, next: 
     forward!.textContent = last ? (next === "" ? "Contents" : "Next lesson") : "Next";
     forward!.disabled = (!!step.check || !!step.hold) && !finished.has(i);
     const finish = () => (finished.add(i), (forward!.disabled = false));
+    if (step.view !== undefined) makeMain(step.view);
     $(".sliders").replaceChildren();
     showCheck($(".check"), step.check, finish);
     scene.show(i, finish);

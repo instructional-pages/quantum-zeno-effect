@@ -6,6 +6,25 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-14
+
+The course is complete: all ten lessons.
+
+### Added
+
+- Lesson 10, "The sandbox": one recap screen per idea (the arrow, chance, a check,
+  turning, amplitude, small turns), each one sentence with its view brought to the front
+  and its slider live. Then a final round at a speed and time not seen before (80° a
+  second for 3 seconds, two thirds of a turn): predict whether 8 checks survive more often
+  than 4, then say why. The sandbox has every control: speed, total time of a run (1 to
+  6 s), checks, Run once (played on the sphere, or stepped with a time slider under
+  reduced motion) and Run 100 (rings on the curve). The Amplitude circle shows one piece
+  of the run, whose amplitude gives each check's chance.
+
+### Changed
+
+- The Amplitude circle writes a half angle that isn't whole to one place (17.1°).
+
 ## [0.9.0] - 2026-11-14
 
 ### Added

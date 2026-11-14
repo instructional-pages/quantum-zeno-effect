@@ -121,3 +121,13 @@ test("soFar counts the checks made and finds the first down", () => {
   assert.deepEqual(soFar(Array(10).fill("up"), 0.3), { done: 3, down: 0 });
   assert.deepEqual(soFar([], 0.7), { done: 0, down: 0 });
 });
+
+test("lesson 10's final round: 80°/s for 3 s, 4 checks then 8", () => {
+  const turn = turned(80, 3);
+  assert.equal(turn, 240);
+  assert.equal(survival(turn, 4).toFixed(3), "0.316");
+  assert.equal(survival(turn, 8).toFixed(3), "0.574");
+  // Each check's loss, 60° pieces then 30°: close to a quarter.
+  assert.equal(chanceDown(60).toFixed(3), "0.250");
+  assert.equal(chanceDown(30).toFixed(3), "0.067");
+});
