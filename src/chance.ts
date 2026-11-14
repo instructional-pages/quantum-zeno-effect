@@ -38,3 +38,15 @@ export const smallChance = (x: number): string => toPlaces(x, x < 0.01 ? 4 : 3);
 
 // An amplitude squared into a small chance (lesson 7): "0.174² = 0.030".
 export const squaredSmall = (a: number): string => `${toPlaces(a, 3)}² = ${smallChance(a * a)}`;
+
+// A chance per check to three places, or five once it rounds to 1.000, so that 0.99975
+// (a 1.8° piece) doesn't read as certain.
+export const perCheck = (x: number): string => toPlaces(x, toPlaces(x, 3) === "1.000" && x < 1 ? 5 : 3);
+
+// One check's chance of up multiplied over `n` checks (lesson 8): written out up to three
+// times ("0.500 × 0.500 = 0.25"), and in words beyond ("0.976 multiplied 10 times = 0.78").
+export function repeated(x: number, n: number): string {
+  const each = perCheck(x);
+  const product = n <= 3 ? Array.from({ length: n }, () => each).join(" × ") : `${each} multiplied ${n} times`;
+  return `${product} = ${twoPlaces(x ** n)}`;
+}

@@ -6,6 +6,25 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-14
+
+### Added
+
+- Lesson 8, "Checking often": a half turn checked twice on the way, scrubbed with the time
+  slider; multiplying chances (two coin tosses); the formula for N checks, cos² of half a
+  piece multiplied N times, worked out live in the Math view; a check that asks whether 10
+  checks beat 2, then why (three explanations, with what is wrong in the other two); the
+  plot filled in point by point at 1, 2, 10 and 100 checks, then as the whole curve, with
+  the loss roughly halving each time the checks double; single random runs to drag
+  through; Run 100, whose share of survivors lands on the plot as a ring and settles as
+  runs add up; and a sandbox with speed, time, checks and runs.
+- The Plot view can show counted results as hollow rings beside its dots.
+
+### Changed
+
+- After a check with choices is revealed, its verdict sits under the choices, so a row of
+  choices never runs past the text.
+
 ## [0.6.0] - 2026-11-14
 
 ### Added

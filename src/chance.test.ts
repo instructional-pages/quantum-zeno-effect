@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { chanceSum, emptyTally, fraction, record, runs, smallChance, squared, squaredSmall, twoPlaces } from "./chance.ts";
-import { amplitudeDown, amplitudeUp, chanceDown, check, height, seeded } from "./zeno.ts";
+import { chanceSum, emptyTally, fraction, perCheck, record, repeated, runs, smallChance, squared, squaredSmall, twoPlaces } from "./chance.ts";
+import { amplitudeDown, amplitudeUp, chanceDown, chanceUp, check, height, seeded } from "./zeno.ts";
 
 test("a tally counts each answer and gives its share of the runs", () => {
   const tally = record(emptyTally(), ["up", "up", "down", "up"]);
@@ -59,4 +59,16 @@ test("a small chance is the amplitude of down squared, written out (lesson 7)", 
   assert.equal(squaredSmall(amplitudeDown(40)), "0.342² = 0.117");
   assert.equal(squaredSmall(amplitudeDown(20)), "0.174² = 0.030");
   assert.equal(squaredSmall(amplitudeDown(10)), "0.087² = 0.0076");
+});
+
+test("lesson 8 writes out a product of chances up to three times, then in words", () => {
+  assert.equal(repeated(chanceUp(90), 2), "0.500 × 0.500 = 0.25");
+  assert.equal(repeated(chanceUp(18), 10), "0.976 multiplied 10 times = 0.78");
+  assert.equal(repeated(chanceUp(1.8), 100), "0.99975 multiplied 100 times = 0.98");
+});
+
+test("a chance per check never rounds to a certain 1.000 unless it is 1", () => {
+  assert.equal(perCheck(0.99975), "0.99975");
+  assert.equal(perCheck(1), "1.000");
+  assert.equal(perCheck(0.5), "0.500");
 });
