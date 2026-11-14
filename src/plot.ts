@@ -1,6 +1,6 @@
 // The Plot view (lessons 1, 5, 8 and 10): a line plot drawn as SVG to the figure's size,
-// with its axes and their ticks, curves, dots on them, and dashed upright marks, each
-// with a label above the plot.
+// with its axes and their ticks, curves, dots on them, hollow rings for counted results,
+// and dashed upright marks, each with a label above the plot.
 
 import { path, place, type Axis, type Box, type Point } from "./graph.ts";
 
@@ -9,6 +9,9 @@ export interface PlotScene {
   label: string;
   curves: Point[][];
   dots: Point[];
+  // Counted results, such as the share of 100 runs that survived (lesson 8): rings, so
+  // they read apart from the dots by shape, not hue.
+  rings?: Point[];
   marks: { x: number; label: string }[];
 }
 
@@ -28,7 +31,7 @@ export function createPlotView(figure: HTMLElement, xAxis: Axis, yAxis: Axis): P
   figure.append(svg);
 
   return {
-    draw({ label, curves, dots, marks }) {
+    draw({ label, curves, dots, rings = [], marks }) {
       const width = svg.clientWidth;
       const height = svg.clientHeight;
       const main = figure.classList.contains("main");
@@ -58,6 +61,10 @@ export function createPlotView(figure: HTMLElement, xAxis: Axis, yAxis: Axis): P
         parts.push(`<line class="mark" x1="${left}" y1="${box.top}" x2="${left}" y2="${bottom}"/>`, `<text x="${left}" y="${box.top - 10}" text-anchor="middle">${mark.label}</text>`);
       }
       for (const curve of curves) parts.push(`<path class="curve" d="${path(curve, xAxis, yAxis, box)}"/>`);
+      for (const ring of rings) {
+        const [x, y] = at(ring);
+        parts.push(`<circle class="ring" cx="${x}" cy="${y}" r="${main ? 7 : 4.5}"/>`);
+      }
       for (const dot of dots) {
         const [x, y] = at(dot);
         parts.push(`<circle class="dot" cx="${x}" cy="${y}" r="${main ? 6 : 4}"/>`);

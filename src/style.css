@@ -219,10 +219,15 @@ h1 {
   font-size: 0.875rem;
 }
 
-/* A prompt answered by picking: its choices in a row, the picked one bordered bright. */
+/* A prompt answered by picking: its choices in a row, the picked one bordered bright, and
+   the verdict under them, so a row of choices never pushes past the text. */
 .check .choices {
   display: flex;
   gap: 0.5rem;
+}
+
+.check .prompt[role="group"] output {
+  grid-column: 2 / -1;
 }
 
 .choices button {
@@ -475,7 +480,7 @@ figure:not(.main) .math .note {
 }
 
 /* The plot (lessons 1, 5, 8 and 10): one bright curve and its dot, on quiet axes, with
-   dashed upright marks. */
+   dashed upright marks and hollow rings for counted runs. */
 .plot {
   position: absolute;
   inset: 0;
@@ -513,6 +518,12 @@ figure:not(.main) .plot text {
 
 .plot .dot {
   fill: var(--text);
+}
+
+.plot .ring {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
 }
 
 /* The Amplitude circle (lesson 6): the quarter from up to down bright on a faint circle,

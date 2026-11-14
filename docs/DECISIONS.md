@@ -202,3 +202,16 @@ starting the repo.
 - **Question:** What range does lesson 7's turn take, and how does the check stay unspoiled?
 - **Choice:** Turns in steps of 2° (half the turn stays whole on the Amplitude circle) up to 60°. Before the check the slider starts at 20°, so the 10° row can't be filled in early; after it, the learner drags to 10° to fill the last row (Next waits for it), and from then on the slider goes down to 0°. The zoomed plot (0–60°, chance 0–0.25) shows only its axes until the step after that.
 - **Why:** The check asks for the 10° value, so the table and plot must not show it first; filling it in by hand straight after the reveal is the confirmation.
+
+## 2026-11-14: How lesson 8's runs are timed (decided by Claude, pending review)
+
+- **Question:** Lesson 8 has speed, time, check count and run. What does the time slider do, and how long is a run?
+- **Choice:** Every run lasts 4 seconds, with the checks evenly spaced and the last at the end; the time slider (0 to 4 s) scrubs through the run on the sphere. Before Run once, the sphere shows the run in which every check said up (labelled as such); a new check count or speed goes back to it. The speed (sandbox only, 15–90°/s) sets how far a run turns: 45°/s is the half turn of the guided steps, 90°/s a full turn.
+- **Why:** The learner drives the motion (no autoplay), and dragging through one random history shows a "down" sending the arrow to the bottom. A fixed run length keeps the plot's question the same throughout: how much survives one run.
+
+## 2026-11-14: Lesson 8's plot, checks and runs (decided by Claude, pending review)
+
+- **Question:** How do lesson 8's plot and checks work without giving the answer away?
+- **Choice:** The plot (1 to 100 checks, linear) shows only the 2-check point before the check. The check comes in two steps: "higher or lower with 10 checks?" (reveal 0.78), then "why?", with the three explanations written out in the text and picked as a, b or c. After that the learner sets 1, 2, 10 and 100 checks to fill in the points (Next waits for all four), and the next step draws the curve. Run 100 adds 100 runs at the current check count and puts their share on the plot as a hollow ring; runs at the same count add up. The Math view writes the product out up to three times and in words beyond ("0.976 multiplied 10 times"), since powers are not taught; a chance per check that would round to 1.000 keeps five places (0.99975).
+- **Why:** Predict first, then confirm by hand, as in lesson 7. Rings read apart from the dots by shape, not hue. Long explanations didn't fit as buttons in the 18rem sidebar.
+
