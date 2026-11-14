@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { chanceSum, emptyTally, fraction, record, runs, squared, twoPlaces } from "./chance.ts";
-import { amplitudeUp, check, height, seeded } from "./zeno.ts";
+import { chanceSum, emptyTally, fraction, record, runs, smallChance, squared, squaredSmall, twoPlaces } from "./chance.ts";
+import { amplitudeDown, amplitudeUp, chanceDown, check, height, seeded } from "./zeno.ts";
 
 test("a tally counts each answer and gives its share of the runs", () => {
   const tally = record(emptyTally(), ["up", "up", "down", "up"]);
@@ -45,4 +45,18 @@ test("an amplitude is written to three places and squared into its chance (lesso
   assert.equal(squared(amplitudeUp(90)), "0.707² = 0.50");
   assert.equal(squared(amplitudeUp(180)), "0.000² = 0.00");
   assert.equal(squared(0.8), "0.800² = 0.64");
+});
+
+test("small turns give the chances of lesson 7's table, each about a quarter of the last", () => {
+  assert.equal(smallChance(chanceDown(40)), "0.117");
+  assert.equal(smallChance(chanceDown(20)), "0.030");
+  assert.equal(smallChance(chanceDown(10)), "0.0076");
+  assert.equal(smallChance(chanceDown(0)), "0.0000");
+  assert.ok(Math.abs(chanceDown(10) / chanceDown(20) - 0.25) < 0.005);
+});
+
+test("a small chance is the amplitude of down squared, written out (lesson 7)", () => {
+  assert.equal(squaredSmall(amplitudeDown(40)), "0.342² = 0.117");
+  assert.equal(squaredSmall(amplitudeDown(20)), "0.174² = 0.030");
+  assert.equal(squaredSmall(amplitudeDown(10)), "0.087² = 0.0076");
 });

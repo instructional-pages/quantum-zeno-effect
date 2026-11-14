@@ -1,10 +1,11 @@
 // Predict-then-reveal checks: the learner types a number for each prompt, or picks one of
 // its choices, and can reveal the answers only once every prompt has one.
 
-// A prompt answered with a typed number, or by picking one of `choices`. A choice may be
-// shown as a picture (SVG markup, one per choice), its name then read out instead.
+// A prompt answered with a typed number, or by picking one of `choices`. A typed number
+// may be allowed to miss the answer by up to `within`, for an "about" answer. A choice may
+// be shown as a picture (SVG markup, one per choice), its name then read out instead.
 export type Prompt =
-  | { label: string; answer: number }
+  | { label: string; answer: number; within?: number }
   | { label: string; choices: string[]; answer: string; pictures?: string[] };
 
 // A typed prediction as a number, or null when it isn't one ("", "abc"). A fraction such
@@ -23,5 +24,9 @@ const answered = (prompt: Prompt, value: string): boolean =>
 
 export const canReveal = (prompts: Prompt[], values: string[]): boolean => prompts.every((p, k) => answered(p, values[k] ?? ""));
 
-export const isRight = (prompt: Prompt, value: string): boolean =>
-  "choices" in prompt ? value === prompt.answer : parseAnswer(value) === prompt.answer;
+export function isRight(prompt: Prompt, value: string): boolean {
+  if ("choices" in prompt) return value === prompt.answer;
+  const x = parseAnswer(value);
+  // The small allowance keeps 0.0076 + 0.001 from falling just short in floating point.
+  return x !== null && Math.abs(x - prompt.answer) <= (prompt.within ?? 0) + 1e-12;
+}

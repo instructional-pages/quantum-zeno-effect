@@ -257,7 +257,7 @@ button {
 }
 
 input[type="text"] {
-  width: 3.5rem;
+  width: 4.5rem;
   box-sizing: border-box;
   padding: 0.25rem 0.5rem;
   font-variant-numeric: tabular-nums;
@@ -573,4 +573,47 @@ figure:not(.main) .dial text {
 
 .dial .head {
   fill: var(--text);
+}
+
+/* The table (lesson 7): quiet rules, numbers lined up, blank cells waiting to fill. */
+.table {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+figure:not(.main) .table {
+  font-size: 0.75rem;
+}
+
+.table table {
+  border-collapse: collapse;
+}
+
+.table th {
+  color: var(--muted);
+  font-weight: normal;
+  font-size: 0.875em;
+  border-bottom: 1px solid var(--muted);
+}
+
+.table th,
+.table td {
+  padding: 0.4em 0.9em;
+  text-align: right;
+}
+
+.table td {
+  border-bottom: 1px solid var(--faint);
+}
+
+.table .note {
+  margin: 1em 0 0;
+  white-space: pre-line;
+  font-size: 0.875em;
+  text-align: center;
 }

@@ -184,3 +184,21 @@ starting the repo.
 - **Question:** What range does lesson 6's angle take?
 - **Choice:** 0° to 180° in steps of 2°, so half the angle is always a whole number of degrees. The sandbox starts at 74°, the check's arrow (amplitude of up about 0.8).
 - **Why:** Past 180° the amplitude of up turns negative, and negative squares are not taught; up to down is all lesson 7 needs.
+
+## 2026-11-14: What lesson 7's table shows (decided by Claude, pending review)
+
+- **Question:** The outline's table has two columns, turn and chance of down. Anything else?
+- **Choice:** A third column between them, the amplitude of down (to three places), so each halving reads across: the turn halves, the amplitude nearly halves, the chance drops to about a quarter. A row fills in only when the learner drags the turn to it (40°, 20°, 10°); a note under the table gives each drop as "chance × 0.26". The chance of down keeps two figures below 0.01 ("0.0076", not "0.008").
+- **Why:** "Half squared is a quarter" needs the halved number in view; without it the table shows the quarter but not where it comes from.
+
+## 2026-11-14: "About" answers in checks (decided by Claude, pending review)
+
+- **Question:** Lesson 7's check answer is 0.0076, but the reasoning it teaches (a quarter of 0.03) gives 0.0075. Must the learner type 0.0076 exactly?
+- **Choice:** A typed prompt may carry an allowance (`within`); lesson 7 accepts 0.0066 to 0.0086. The reveal still names 0.0076 and says that 0.0075 counts.
+- **Why:** The check asks for the pattern, not the fourth decimal; marking 0.0075 wrong would punish the right idea. Lesson 9's "roughly half" check can use it too.
+
+## 2026-11-14: Lesson 7's slider and steps (decided by Claude, pending review)
+
+- **Question:** What range does lesson 7's turn take, and how does the check stay unspoiled?
+- **Choice:** Turns in steps of 2° (half the turn stays whole on the Amplitude circle) up to 60°. Before the check the slider starts at 20°, so the 10° row can't be filled in early; after it, the learner drags to 10° to fill the last row (Next waits for it), and from then on the slider goes down to 0°. The zoomed plot (0–60°, chance 0–0.25) shows only its axes until the step after that.
+- **Why:** The check asks for the 10° value, so the table and plot must not show it first; filling it in by hand straight after the reveal is the confirmation.

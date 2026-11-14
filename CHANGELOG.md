@@ -6,6 +6,24 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-14
+
+### Added
+
+- Lesson 7, "Small turns barely count": squaring small numbers; the chance of down after
+  a turn from the top as the amplitude of down squared; a table that fills in as the turn
+  reaches 40°, 20° and 10° (amplitude of down and chance of down), showing that halving
+  the turn cuts the chance to about a quarter; a check on the chance for a 10° turn; a
+  zoomed plot of the chance of down against the turn, flat near zero; the ball on a
+  hilltop analogy and where it breaks; and a sandbox with turns from 0° to 60°.
+- The Table view, which lesson 7 fills in row by row.
+- A typed prediction can be marked right when it is close enough to an "about" answer
+  (lesson 7 takes 0.0075 for 0.0076).
+
+### Changed
+
+- The answer box in checks is wider, so a typed fraction such as "0.03/4" fits.
+
 ## [0.5.0] - 2026-10-30
 
 ### Added
