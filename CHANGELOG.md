@@ -6,6 +6,20 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-14
+
+### Added
+
+- Lesson 9, "A real experiment": the 1990 experiment of Itano, Heinzen, Bollinger and
+  Wineland, in which about 5,000 beryllium ions were turned from level 1 to level 2 in a
+  256 ms half turn while a laser checked them up to 64 times. The learner runs one ion
+  with 4 flashes, fills in the formula for the share ending in level 2 at 1 to 16
+  flashes, predicts 64 flashes from 32, then sees the paper's measurements as rings with
+  their error bars, falling from 0.995 to about 0. A further step shows why they sit a
+  little under the simple formula (each flash lasted 2.4 ms), with the authors' full
+  calculation as dots. The Table view fills in the paper's Table I as the lesson goes;
+  the sandbox runs one ion at 1 to 64 flashes.
+
 ## [0.8.0] - 2026-11-14
 
 ### Added

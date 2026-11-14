@@ -24,7 +24,7 @@ Every analogy is marked **Analogy** in the text and followed by **Where it break
 | 6 | Amplitudes | Sphere | Amplitude circle, Math | angle |
 | 7 | Small turns barely count | Amplitude circle | Table, Plot (chance of down, zoomed), Math | angle |
 | 8 | Checking often | Sphere | Plot (survival vs. checks), Math | speed, time, **check count**, run |
-| 9 | A real experiment | Plot (Itano data) | Sphere | check count |
+| 9 | A real experiment | Plot (Itano data) | Sphere, Table, Math | check count, time, run |
 | 10 | The sandbox | Learner's choice | all others | all |
 
 New controls are in **bold**. Views:
@@ -229,9 +229,12 @@ so each flash is a check.
 **Steps:** what they counted is slightly different from lesson 8: not "survived every
 check" but "found in level 2 at the end", because ions that a flash found in level 2 kept
 turning (as in lesson 8's single runs). The prediction for that is ½ × (1 − cos^N(180° / N)).
-The plot shows their measured points over the prediction for N = 1, 2, 4, 8, 16, 32, 64:
-the chance of ending in level 2 falls from about 1 to about 0.04. The data points are
-transcribed from the paper's table when the lesson is built, and checked against it.
+The plot shows the prediction for N = 1, 2, 4, 8, 16, 32, 64 and their measured points
+(transcribed from the paper's Table I, 1 → 2 transition; see DECISIONS.md): the chance of
+ending in level 2 falls from 0.995 to about 0. From 4 flashes on the measurements sit
+0.03 to 0.06 under the simple prediction, because each flash lasted 2.4 ms; the authors'
+full calculation, which includes that, matches them to about 0.02, and the lesson shows
+both.
 
 **Analogy:** none needed; this is the real thing.
 
