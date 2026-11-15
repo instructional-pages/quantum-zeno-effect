@@ -6,6 +6,19 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-15
+
+### Added
+
+- `npm run deploy` publishes the built course to GitHub Pages from this machine: it
+  refuses unless the tree is clean and HEAD is `origin/main`, then builds, checks the
+  bundle budget, and force-pushes `dist/` as one commit to `gh-pages`.
+
+### Fixed
+
+- A slider's value no longer wraps onto two lines ("1.50 s" in lesson 10's time slider
+  under reduced motion).
+
 ## [1.0.0] - 2026-11-14
 
 The course is complete: all ten lessons.

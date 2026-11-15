@@ -251,3 +251,15 @@ starting the repo.
 - **Question:** Lesson 8's time slider scrubbed a fixed 4-second run; lesson 10 adds the total time. How does the learner see a single run?
 - **Choice:** The total time (1 to 6 s, in half seconds) sets the run's length, and Run once plays it on the sphere in that time, as lesson 1 does (under reduced motion, a time slider steps through it instead). The plot's curve joins whole numbers of checks only. The Amplitude circle shows one piece of the run (none when a single piece passes a half turn). A new speed or total time clears the rings.
 - **Why:** Two time sliders (one for length, one for scrubbing) would read as the same thing. Past a half turn, the formula at a fraction of a check gives values no run can have, so joining only whole counts keeps the curve honest; at short turns it looks the same as lesson 8's.
+
+## 2026-11-15: How the GitHub Pages deploy works
+
+- **Question:** How does the built site reach GitHub Pages without Actions?
+- **Choice:** The same `scripts/deploy.mjs` as `higher-dimensions`: `npm run deploy` refuses
+  unless the tree is clean and HEAD is `origin/main`, then builds, runs the bundle-size
+  check, and force-pushes `dist/` plus an empty `.nojekyll` as one fresh commit
+  (`deploy <version> from <sha>`) to `gh-pages`. First publish approved by the user on
+  2026-11-15.
+- **Why:** Only merged code, which passed `local-ci`, can go live, and the sibling courses
+  share their tooling. One commit per deploy keeps old bundles out of history.
+
